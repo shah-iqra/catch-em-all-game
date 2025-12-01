@@ -1,7 +1,9 @@
 from django.shortcuts import render
 
 def home(request):
-    return render(request, "game/home.html")
+    # আগে home.html → এখন index.html
+    return render(request, "game/index.html")  
 
-def index(request):
-    return render(request, "game/index.html")   # game page
+def game(request):
+    # আগে index.html → এখন game.html
+    return render(request, "game/game.html")   # game page
