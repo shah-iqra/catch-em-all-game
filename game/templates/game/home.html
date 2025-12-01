@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Catch the Ball Game 🎯</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 50px 20px;
+            background: linear-gradient(to bottom, #a2d5f2, #f0f8ff);
+            overflow: hidden;
+            height: 100vh;
+            position: relative;
+        }
+
+        h1 {
+            color: #ff4500;
+            font-size: 50px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px #fff;
+        }
+
+        p {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        a.button {
+            display: inline-block;
+            padding: 18px 40px;
+            background: #32cd32;
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        a.button:hover {
+            background: #228b22;
+            transform: scale(1.15);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+
+        /* Floating balls */
+        .ball {
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #ff5722, #ffcc00);
+            border-radius: 50%;
+            position: absolute;
+            top: -60px;
+            animation: fall linear infinite;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        @keyframes fall {
+            0% { top: -60px; }
+            100% { top: 110%; }
+        }
+
+        /* Generate multiple balls with different speeds and horizontal positions */
+    </style>
+</head>
+<body>
+    <h1>🎯 Catch the Ball Game 🎯</h1>
+    <p>Move fast and catch as many balls as you can! Are you ready?</p>
+
+    <a href="{% url 'game' %}" class="button">Play Game</a>
+
+    <script>
+        const numberOfBalls = 15;
+
+        for(let i=0; i<numberOfBalls; i++){
+            const ball = document.createElement('div');
+            ball.className = 'ball';
+            ball.style.left = Math.random() * (window.innerWidth - 50) + 'px';
+            ball.style.animationDuration = (3 + Math.random()*4) + 's';
+            ball.style.animationDelay = Math.random()*5 + 's';
+            document.body.appendChild(ball);
+        }
+
+        // Optional: make balls sway left-right while falling
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .ball {
+                animation-name: fall, sway;
+                animation-timing-function: linear, ease-in-out;
+                animation-iteration-count: infinite;
+            }
+            @keyframes sway {
+                0% { transform: translateX(0); }
+                50% { transform: translateX(30px); }
+                100% { transform: translateX(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
